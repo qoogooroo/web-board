@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+	<select id="selectUsers" resultType="com.web.dto.UserDTO">
+		select UI_NUM, UI_NAME, UI_ID, UI_PWD, UI_GRADE, CREDAT, CRETIM,
+		LMODAT, LMOTIM
+		from user_info
+		<where>
+			<if test='searchStr!=null and searchStr!=""'>
+				<if test='search=="uiName"'>
+					AND UI_NAME LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+				<if test='search=="uiId"'>
+					AND UI_ID LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+				<if test='search=="uiPwd"'>
+					AND UI_PWD LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+				<if test='search=="uiGrade"'>
+					AND UI_PHONE LIKE CONCAT('%',#{searchStr},'%')
+				</if>
+			</if>
+		</where>
+	</select>
+	<select id="selectUser" resultType="com.web.dto.UserDTO">
+		Sselect UI_NUM, UI_NAME,
+		UI_ID, UI_PWD, UI_GRADE, CREDAT, CRETIM, LMODAT, LMOTIM
+		from user_info
+		WHERE UI_NUM = #{uiNum}
+	</select>
+	<select id="selectUserByUiId" resultType="com.web.dto.UserDTO">
+		select UI_NUM, UI_NAME,
+		UI_ID, UI_PWD, UI_GRADE, CREDAT, CRETIM, LMODAT, LMOTIM
+		from user_info
+		WHERE UI_ID = #{uiId}
+	</select>
+	<insert id="insertUser">
+		insert into user_info(ui_name, ui_id, ui_pwd,
+		ui_grade)
+		VALUES(#{uiName},#{uiId},#{uiPwd},#{uiGrade})
+	</insert>
+	<update id="updateUser">
+		update USER_INFO
+		set UI_NAME = #{uiName},
+		UI_ID =
+		#{uiId},
+		UI_PWD = #{uiPwd},
+		UI_GRADE=#{uiGrade}
+		where UI_NUM = #{uiNum}
+	</update>
+	<delete id="deleteUser">
+		delete from USER_INFO where UI_NUM = #{uiNum}
+	</delete>
+</mapper>

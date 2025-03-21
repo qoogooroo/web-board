@@ -27,6 +27,9 @@ public class UserService {
 	}
 	
 	public int addUser(UserDTO user) {
+		if(userRepo.selectCntById(user)==1) {
+			return -1;
+		}
 		return userRepo.insertUser(user);
 	}
 	

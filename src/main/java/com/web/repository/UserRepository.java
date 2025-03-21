@@ -25,6 +25,11 @@ public class UserRepository {
 			return session.selectOne("UserMapper.selectUserByUiId", uiId);
 		}
 	}
+	public int selectCntById(UserDTO user) {
+		try(SqlSession session = CommonFactory.getSSF().openSession()){
+			return session.selectOne("UserMapper.selectCntById", user);
+		}
+	}
 	public int insertUser(UserDTO user) {
 		try(SqlSession session = CommonFactory.getSSF().openSession(true)){
 			return session.insert("UserMapper.insertUser", user);
@@ -39,5 +44,11 @@ public class UserRepository {
 		try(SqlSession session = CommonFactory.getSSF().openSession(true)){
 			return session.delete("UserMapper.deleteUser", uiNum);
 		}
+	}
+	public static void main(String[] args) {
+		UserRepository userRepo = new UserRepository();
+		UserDTO user = new UserDTO();
+		user.setUiId("bmo01");
+		System.out.println(userRepo.selectCntById(user));
 	}
 }

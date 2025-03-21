@@ -25,9 +25,7 @@ public class AuthFilter extends HttpFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		if(session.getAttribute("user")==null) {
-			request.setAttribute("msg", "권한이 필요합니다.");
-			request.setAttribute("url", "views/user/login");
-			CommonView.forwardMsg(request, response);
+			CommonView.forwardMsg(request, response, "권한이 필요합니다.", "/views/user/login");
 			return;
 		}
 		chain.doFilter(request, response);

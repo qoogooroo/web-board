@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/include/head.jsp"></c:import>
-<link href="/rescouces/css/login.css" rel="stylesheet">
+<link href="/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
+
 	<main class="form-signin w-100 m-auto">
 		<form method="POST" action="/user/join" onsubmit="return validation()">
 			<img class="mb-4" src="/resources/svg/bootstrap-logo.svg" alt=""

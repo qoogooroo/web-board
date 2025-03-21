@@ -7,12 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/include/head.jsp"></c:import>
-<link href="/rescouces/css/login.css" rel="stylesheet">
+<link href="/resources/css/login.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 	<main class="form-signin w-100 m-auto">
-		<form>
+		<form method="POST" action="/user/login" onsubmit="return validation()">
 			<img class="mb-4" src="/resources/svg/bootstrap-logo.svg" alt=""
 				width="72" height="57">
 			<h1 class="h3 mb-3 fw-normal">Login</h1>
@@ -41,6 +41,21 @@
 	<script>
 		function goPage(url) {
 			location.href = url;
+		}
+		function validation(){
+			const uiId = document.querySelector('#uiId');
+			if(uiId.value.trim()<4){
+				alert('아이디는 4자리 이상입니다.');
+				uiId.focus();
+				return false
+			}
+			const uiPwd = document.querySelector('#uiPwd');
+			if(uiPwd.value.trim()<4){
+				alert('비밀번호는 4자리 이상입니다.');
+				uiPwd.focus();
+				return false
+			}
+			return true;
 		}
 	</script>
 

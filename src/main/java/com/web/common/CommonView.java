@@ -23,7 +23,8 @@ public class CommonView {
 		rd.forward(req, res);
 	}
 	
-	public static void forwardMsg(ServletRequest req, ServletResponse res, String msg, String url) throws ServletException, IOException {
+	public static void forwardMsg(ServletRequest req, ServletResponse res, String msg, String url) 
+			throws ServletException, IOException {
 		req.setAttribute("msg", msg);
 		req.setAttribute("url", url);
 		forwardMsg(req, res);

@@ -25,7 +25,7 @@
 		</where>
 	</select>
 	<select id="selectUser" resultType="com.web.dto.UserDTO">
-		Sselect UI_NUM, UI_NAME,
+		Select UI_NUM, UI_NAME,
 		UI_ID, UI_PWD, UI_GRADE, CREDAT, CRETIM, LMODAT, LMOTIM
 		from user_info
 		WHERE UI_NUM = #{uiNum}
@@ -35,6 +35,9 @@
 		UI_ID, UI_PWD, UI_GRADE, CREDAT, CRETIM, LMODAT, LMOTIM
 		from user_info
 		WHERE UI_ID = #{uiId}
+	</select>
+	<select id="selectCntById" resultType="int">
+		select COUNT(UI_ID) FROM USER_INFO WHERE UI_ID=#{uiId}
 	</select>
 	<insert id="insertUser">
 		insert into user_info(ui_name, ui_id, ui_pwd,

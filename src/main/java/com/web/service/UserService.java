@@ -26,6 +26,10 @@ public class UserService {
 		return null;
 	}
 	
+	// public User DTO getuserByIdAndPwd(UserDTO user){
+	// return userRepo.selectUserByIdAndPwd(user);
+	//}
+	
 	public int addUser(UserDTO user) {
 		if(userRepo.selectCntById(user)==1) {
 			return -1;

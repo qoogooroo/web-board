@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.web.common.CommonView;
+import com.web.common.SHA256Util;
 import com.web.dto.UserDTO;
 import com.web.service.UserService;
 
@@ -44,6 +45,7 @@ public class UserServlet extends HttpServlet {
 		String url = "";
 		String msg = "";
 		if("join".equals(cmd)) {
+			user.setUiPwd(SHA256Util.encode(user.getUiPwd()));
 			int result = userService.addUser(user);
 			msg = "회원가입시 성공하였습니다";
 			url = "/views/user/login";
@@ -53,11 +55,11 @@ public class UserServlet extends HttpServlet {
 			}
 		} else if("login".equals(cmd)) {
 			UserDTO loginUser = userService.login(user.getUiId(), user.getUiPwd());
-			HttpSession session = request.getSession();
-			session.setAttribute("user", loginUser);
 			msg = "아이디나 비밀번호가 잘못되었습니다.";
-			url = "/view/user/login";
+			url = "/views/user/login";
 			if(loginUser!=null) {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", loginUser);
 				msg = loginUser.getUiName() + "님 반갑습니다.";
 				url="/";
 			}

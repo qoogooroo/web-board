@@ -54,7 +54,8 @@ public class UserServlet extends HttpServlet {
 				url = "/views/user/join";
 			}
 		} else if("login".equals(cmd)) {
-			UserDTO loginUser = userService.login(user.getUiId(), user.getUiPwd());
+			
+			UserDTO loginUser = userService.login(user.getUiId(), SHA256Util.encode(user.getUiPwd()));
 			msg = "아이디나 비밀번호가 잘못되었습니다.";
 			url = "/views/user/login";
 			if(loginUser!=null) {
